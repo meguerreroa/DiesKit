@@ -28,10 +28,11 @@ int main()
 
 	unsigned long comp_size = compressBound(size);
 	unsigned char *comp_buff = new unsigned char[comp_size];
+	unsigned char *encbuff = new unsigned char[comp_size];
 	if (compress2(comp_buff, &comp_size, buff, size, 9) != Z_OK)
 		return -1;
 
-	comp_size += (CAMELLIA_BLOCK_SIZE - comp_size % CAMELLIA_BLOCK_SIZE);//16×Ö½Ú¶ÔÆë
+	comp_size += (CAMELLIA_BLOCK_SIZE - comp_size % CAMELLIA_BLOCK_SIZE);//16å­—èŠ‚å¯¹é½
 	unsigned char *encbuff = new unsigned char[comp_size];
 	memset(encbuff, 0, comp_size);
 
@@ -48,7 +49,7 @@ int main()
 		enc += CAMELLIA_BLOCK_SIZE;
 		pla += CAMELLIA_BLOCK_SIZE;
 	}
-	//²»ÖªµÀÎªºÎ¼ÓÃÜºó×îºó16×Ö½ÚºÍÓÎÏ·Ô­À´²»Ò»Ñù£¬µ«²»Ó°Ïì½âÑ¹ºóµÄÄÚÈİ
+	//ä¸çŸ¥é“ä¸ºä½•åŠ å¯†åæœ€å16å­—èŠ‚å’Œæ¸¸æˆåŸæ¥ä¸ä¸€æ ·ï¼Œä½†ä¸å½±å“è§£å‹åçš„å†…å®¹
 
 	fp = fopen("EXEC.mod", "wb");
 	fwrite(encbuff, comp_size, 1, fp);
