@@ -28,7 +28,7 @@ int main()
 
 	unsigned long comp_size = compressBound(size);
 	unsigned char *comp_buff = new unsigned char[comp_size];
-	unsigned char *encbuff = new unsigned char[comp_size];
+	
 	if (compress2(comp_buff, &comp_size, buff, size, 9) != Z_OK)
 		return -1;
 
